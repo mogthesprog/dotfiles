@@ -10,6 +10,7 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
+    "hrsh7th/cmp-nvim-lsp-signature-help",
     "hrsh7th/nvim-cmp",
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
@@ -23,6 +24,9 @@ return {
       vim.lsp.protocol.make_client_capabilities(),
       cmp_lsp.default_capabilities()
     )
+
+    -- enable completion hints while cursor is inside parentheses
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
 
     require("fidget").setup({})
     require("mason").setup()
@@ -62,6 +66,52 @@ return {
               }
             }
           })
+        end,
+        gopls = function()
+          require('lspconfig').gopls.setup({
+            capabilities = capabilities,
+            settings = {
+              gopls = {
+                gofumpt = true,
+                codelenses = {
+                  gc_details = false,
+                  generate = true,
+                  regenerate_cgo = true,
+                  run_govulncheck = true,
+                  test = true,
+                  tidy = true,
+                  upgrade_dependency = true,
+                  vendor = true,
+                },
+                hints = {
+                  assignVariableTypes = true,
+                  compositeLiteralFields = true,
+                  compositeLiteralTypes = true,
+                  constantValues = true,
+                  functionTypeParameters = true,
+                  parameterNames = true,
+                  rangeVariableTypes = true,
+                },
+                analyses = {
+                  -- fieldalignment = true,
+                  nilness = true,
+                  unusedparams = true,
+                  unusedwrite = true,
+                  useany = true,
+                },
+                usePlaceholders = true,
+                completeUnimported = true,
+                staticcheck = true,
+                directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+                semanticTokens = true,
+                -- analyses = {
+                --   unusedparams = true,
+                -- },
+                -- staticcheck = true,
+                -- gofumpt = true,
+              },
+            },
+          })
         end
       }
     })
@@ -77,12 +127,17 @@ return {
       sources = {
         { name = 'path' },
         { name = 'nvim_lsp' },
-        { name = 'luasnip', keyword_length = 2 },
-        { name = 'buffer',  keyword_length = 3 },
+        { name = 'luasnip',                keyword_length = 2 },
+        { name = 'buffer',                 keyword_length = 3 },
+        { name = 'nvim_lsp_signature_help' },
+      },
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
       },
       mapping = cmp.mapping.preset.insert({
-        -- ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-        -- ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
         -- ['<C-Space>'] = cmp.mapping.complete(),
       }),

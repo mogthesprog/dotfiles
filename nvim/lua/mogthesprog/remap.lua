@@ -1,6 +1,14 @@
 local which_key = require "which-key"
 local builtin = require('telescope.builtin')
 
+-- vim.api.nvim_create_autocmd("CursorHold", {
+--   pattern = "*",
+--   callback = vim.lsp.buf.signature_help,
+--   desc = "auto hover on cursorhold",
+-- })
+--
+-- vim.keymap.set("i", "<CursorHold>", vim.lsp.buf.hover)
+
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('user_lsp_attach', { clear = true }),
   callback = function(event)
@@ -16,7 +24,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         { "<leader>lw", vim.lsp.buf.workspace_symbol, buffer = buffer, desc = "Workspace symbol" },
         { "K",          vim.lsp.buf.hover,            buffer = buffer, desc = "Show hover information" },
         { "[d",         vim.diagnostic.goto_next,     buffer = buffer, desc = "Go to next diagnostic" },
-        { "]d",         vim.diagnostic.goto_next,     buffer = buffer, desc = "Go to previous diagnostic" },
+        { "]d",         vim.diagnostic.goto_prev,     buffer = buffer, desc = "Go to previous diagnostic" },
         { "gd",         vim.lsp.buf.definition,       buffer = buffer, desc = "Go to definition" },
         { "gl",         vim.diagnostic.open_float,    buffer = buffer, desc = "Open diagnostic float" },
       }

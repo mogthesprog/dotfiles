@@ -37,3 +37,5 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
   desc = "Enable spellcheck for defined filetypes",
 })
+
+vim.opt.updatetime = 1000
