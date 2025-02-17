@@ -9,8 +9,7 @@ return {
       extensions = {
         project = {
           base_dirs = {
-            { path = '~/data/projects/github.com/', max_depth = 3 },
-            { path = '~/data/projects/gitlab.com/', max_depth = 3 },
+            { path = '~/data/projects', max_depth = 3 },
             { path = '~/.config' },
           },
           hidden_files = true, -- default: false
