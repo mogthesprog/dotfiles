@@ -1,14 +1,6 @@
 local which_key = require "which-key"
 local builtin = require('telescope.builtin')
 
--- vim.api.nvim_create_autocmd("CursorHold", {
---   pattern = "*",
---   callback = vim.lsp.buf.signature_help,
---   desc = "auto hover on cursorhold",
--- })
---
--- vim.keymap.set("i", "<CursorHold>", vim.lsp.buf.hover)
-
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('user_lsp_attach', { clear = true }),
   callback = function(event)
@@ -32,13 +24,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 
     -- https://www.mitchellhanberg.com/modern-format-on-save-in-neovim/
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = event.buf,
-      callback = function()
-        vim.lsp.buf.format { async = false, id = event.data.client_id }
-      end
-
-    })
+    -- vim.api.nvim_create_autocmd("BufWritePre", {
+    --   buffer = event.buf,
+    --   callback = function()
+    --     vim.lsp.buf.format {
+    --       async = false,
+    --       id = event.data.client_id
+    --     }
+    --   end
+    -- })
   end,
 })
 
@@ -79,7 +73,8 @@ which_key.add(
 -- Register the semicolon mapping separately as it doesn't use the leader prefix
 which_key.add(
   {
-    { ";", builtin.buffers, desc = "Find buffers" },
+    { ";",         builtin.buffers, desc = "Find buffers" },
+    { "<leader>q", ":bd<CR>",       desc = "Quit active buffer" },
   }
 )
 

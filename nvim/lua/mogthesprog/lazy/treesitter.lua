@@ -7,7 +7,7 @@ return {
     configs.setup({
       ensure_installed = {
         "c", "lua", "vim", "vimdoc", "elixir", "javascript", "html", "python", "typescript",
-        "go", "rust", "hcl", "terraform",
+        "go", "rust", "hcl", "terraform", "bash"
       },
       sync_install = false,
       highlight = { enable = true },

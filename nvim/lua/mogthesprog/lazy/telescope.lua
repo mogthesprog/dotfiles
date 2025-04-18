@@ -9,7 +9,7 @@ return {
       extensions = {
         project = {
           base_dirs = {
-            { path = '~/data/projects', max_depth = 3 },
+            { path = '~/data/projects', max_depth = 4 },
             { path = '~/.config' },
           },
           hidden_files = true, -- default: false

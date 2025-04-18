@@ -1,1 +1,1 @@
-vim.cmd("setlocal textwidth=80")
+vim.cmd("setlocal textwidth=120")

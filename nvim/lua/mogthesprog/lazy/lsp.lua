@@ -67,52 +67,6 @@ return {
             }
           })
         end,
-        gopls = function()
-          require('lspconfig').gopls.setup({
-            capabilities = capabilities,
-            settings = {
-              gopls = {
-                gofumpt = true,
-                codelenses = {
-                  gc_details = false,
-                  generate = true,
-                  regenerate_cgo = true,
-                  run_govulncheck = true,
-                  test = true,
-                  tidy = true,
-                  upgrade_dependency = true,
-                  vendor = true,
-                },
-                hints = {
-                  assignVariableTypes = true,
-                  compositeLiteralFields = true,
-                  compositeLiteralTypes = true,
-                  constantValues = true,
-                  functionTypeParameters = true,
-                  parameterNames = true,
-                  rangeVariableTypes = true,
-                },
-                analyses = {
-                  -- fieldalignment = true,
-                  nilness = true,
-                  unusedparams = true,
-                  unusedwrite = true,
-                  useany = true,
-                },
-                usePlaceholders = true,
-                completeUnimported = true,
-                staticcheck = true,
-                directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
-                semanticTokens = true,
-                -- analyses = {
-                --   unusedparams = true,
-                -- },
-                -- staticcheck = true,
-                -- gofumpt = true,
-              },
-            },
-          })
-        end
       }
     })
 
@@ -139,7 +93,7 @@ return {
         ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
         ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        -- ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-Space>'] = cmp.mapping.complete(),
       }),
       snippet = {
         expand = function(args)
